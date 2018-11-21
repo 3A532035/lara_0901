@@ -1,49 +1,59 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 
-@section('title', '所有文章')
+@section('title', '文章管理')
 
 @section('content')
-<!-- Page Header -->
-<!-- Set your background image for this header on the line below. -->
-<header class="intro-header" style="background-image: url('{{ asset('img/home-bg.jpg') }}')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>Clean Blog</h1>
-                    <hr class="small">
-                    <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
-                </div>
-            </div>
-        </div>
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            文章管理 <small>所有文章列表</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-edit"></i> 文章管理
+            </li>
+        </ol>
     </div>
-</header>
+</div>
+<!-- /.row -->
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            @foreach(range(1, 5) as $id)
-            <div class="post-preview">
-                <a href="{{ route('posts.show', $id) }}">
-                    <h2 class="post-title">
-                        Post {{ $id }}
-                    </h2>
-                    <h3 class="post-subtitle">
-                        Subtitle
-                    </h3>
-                </a>
-                <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
-            </div>
-            <hr>
-            @endforeach
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="next">
-                    <a href="#">Older Posts &rarr;</a>
-                </li>
-            </ul>
+<div class="row" style="margin-bottom: 20px; text-align: right">
+    <div class="col-lg-12">
+        <a href="{{ route('admin.posts.create') }}" class="btn btn-success">建立新文章</a>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="30" style="text-align: center">#</th>
+                        <th>標題</th>
+                        <th width="70" style="text-align: center">精選？</th>
+                        <th width="100" style="text-align: center">功能</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach(range(1, 20) as $id)
+                    <tr>
+                        <td style="text-align: center">{{ $id }}</td>
+                        <td>文章標題</td>
+                        <td style="text-align: center">V</td>
+                        <td>
+                            <a href="{{ route('admin.posts.edit', $id) }}">編輯</a>
+                            /
+                            <a href="#">刪除</a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+<!-- /.row -->
 @endsection
