@@ -23,14 +23,22 @@ class AdminPostsController extends Controller
 
     public function edit($id)
     {
-        $data = ['id' => $id];
-
+//        $data = ['id' => $id];
+        $posts=Post::find($id);
+        $data=['post'=>$posts];
+//        return dd($data);
         return view('admin.posts.edit', $data);
     }
 
     public function store(Request $request)
     {
         Post::create($request->all());
+        return redirect('/admin/posts');
+    }
+
+    public function update(Request $request,$id){
+        $post=Post::find($id);
+        $post->update($request->all());
         return redirect('/admin/posts');
     }
 }
